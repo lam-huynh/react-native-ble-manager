@@ -5,7 +5,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/innoveit/react-native-ble-manager.svg?style=flat)](https://github.com/innoveit/react-native-ble-manager/issues)
 
 This is a porting of https://github.com/don/cordova-plugin-ble-central project to React Native.
-
+forked from [innoveit/react-native-ble-manager](https://github.com/innoveit/react-native-ble-manager)
+replace Deprecated functions
 ## Requirements
 
 RN 0.60+

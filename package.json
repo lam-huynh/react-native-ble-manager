@@ -1,15 +1,15 @@
 {
-  "name": "react-native-ble-manager",
-  "version": "7.6.0",
+  "name": "@nois/react-native-ble-manager",
+  "version": "7.6.1",
   "description": "A BLE module for react native.",
   "main": "BleManager",
   "types": "./index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/innoveit/react-native-ble-manager.git"
+    "url": "git+https://github.com/lam-huynh/react-native-ble-manager.git"
   },
   "bugs": {
-    "url": "https://github.com/innoveit/react-native-ble-manager/issues"
+    "url": "https://github.com/lam-huynh/react-native-ble-manager/issues"
   },
   "keywords": [
     "react-native",
@@ -20,12 +20,13 @@
     "low energy"
   ],
   "license": "Apache-2.0",
-  "author": {
-    "name": "Innove",
-    "url": "https://github.com/innoveit"
-  },
+  "author": "Innove (https://github.com/innoveit)",
   "scripts": {
     "version": "git add -A",
     "postversion": "git push && git push --tags"
+  },
+  "homepage": "https://github.com/innoveit/react-native-ble-manager#readme",
+  "directories": {
+    "example": "example"
   }
 }
