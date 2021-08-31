@@ -17,3 +17,4 @@ gradlew
 /ios/**/*xcuserdata*
 /ios/**/*xcshareddata*
 *.log
+*.tgz
