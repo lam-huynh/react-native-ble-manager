@@ -1,6 +1,6 @@
 {
   "name": "@nois/react-native-ble-manager",
-  "version": "7.6.2",
+  "version": "8.0.1",
   "description": "A BLE module for react native.",
   "main": "BleManager",
   "types": "./index.d.ts",
