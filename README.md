@@ -47,7 +47,7 @@ The library support the react native autolink feature.
 
     <!-- Only when targeting Android 12 or higher -->
     <!-- Please make sure you read the following documentation to have a
-         better understanging of the new permissions.
+         better understanding of the new permissions.
          https://developer.android.com/guide/topics/connectivity/bluetooth/permissions#assert-never-for-location
          -->
 
@@ -135,10 +135,12 @@ Returns a `Promise` object.
 - `seconds` - `Integer` - the amount of seconds to scan.
 - `allowDuplicates` - `Boolean` - [iOS only] allow duplicates in device scanning
 - `scanningOptions` - `JSON` - [Android only] after Android 5.0, user can control specific ble scan behaviors:
-  - `numberOfMatches` - `Number` - corresponding to [`setNumOfMatches`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setNumOfMatches(int)>)
-  - `matchMode` - `Number` - corresponding to [`setMatchMode`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setMatchMode(int)>)
-  - `scanMode` - `Number` - corresponding to [`setScanMode`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setScanMode(int)>)
-  - `reportDelay` - `Number` - corresponding to [`setReportDelay`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setReportDelay(long)>)
+  - `numberOfMatches` - `Number` - [Android only] corresponding to [`setNumOfMatches`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setNumOfMatches(int)>)
+  - `matchMode` - `Number` - [Android only] corresponding to [`setMatchMode`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setMatchMode(int)>)
+  - `scanMode` - `Number` - [Android only] corresponding to [`setScanMode`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setScanMode(int)>)
+  - `reportDelay` - `Number` - [Android only] corresponding to [`setReportDelay`](<https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder.html#setReportDelay(long)>)
+  - `phy` - `Number` - [Android only] corresponding to [`setPhy`](https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder#setPhy(int))
+  - `legacy` - `Boolean` - [Android only] corresponding to [`setLegacy`](https://developer.android.com/reference/android/bluetooth/le/ScanSettings.Builder#setLegacy(boolean))
 
 **Examples**
 
@@ -666,6 +668,25 @@ BleManager.isPeripheralConnected(
 });
 ```
 
+### setName(name) [Android only]
+
+Create the request to set the name of the bluetooth adapter. (https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#setName(java.lang.String))
+Returns a `Promise` object.
+
+**Examples**
+
+```js
+BleManager.setName("INNOVEIT_CENTRAL")
+  .then(() => {
+    // Success code
+    console.log("Name set successfully");
+  })
+  .catch((error) => {
+    // Failure code
+    console.log("Name could not be set");
+  });
+```
+
 ## Events
 
 ### BleManagerStopScan
@@ -760,7 +781,7 @@ async function connectAndPrepare(peripheral, service, characteristic) {
     ({ value, peripheral, characteristic, service }) => {
       // Convert bytes array to string
       const data = bytesToString(value);
-      console.log(`Recieved ${data} for characteristic ${characteristic}`);
+      console.log(`Received ${data} for characteristic ${characteristic}`);
     }
   );
   // Actions triggereng BleManagerDidUpdateValueForCharacteristic event
@@ -784,6 +805,8 @@ A peripheral was disconnected.
 
 - `peripheral` - `String` - the id of the peripheral
 - `status` - `Number` - [Android only] disconnect [`reasons`](<https://developer.android.com/reference/android/bluetooth/BluetoothGattCallback.html#onConnectionStateChange(android.bluetooth.BluetoothGatt,%20int,%20int)>)
+- `domain` - `String` - [iOS only] disconnect error domain
+- `code` - `Number` - [iOS only] disconnect error code (<https://developer.apple.com/documentation/corebluetooth/cberror/code>)
 
 ### BleManagerPeripheralDidBond
 
@@ -806,3 +829,15 @@ _For more on performing long-term bluetooth actions in the background:_
 [iOS Bluetooth State Preservation and Restoration](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/CoreBluetoothBackgroundProcessingForIOSApps/PerformingTasksWhileYourAppIsInTheBackground.html#//apple_ref/doc/uid/TP40013257-CH7-SW10)
 
 [iOS Relaunch Conditions](https://developer.apple.com/library/archive/qa/qa1962/_index.html)
+
+### BleManagerDidUpdateNotificationStateFor [iOS only]
+
+The peripheral received a request to start or stop providing notifications for a specified characteristic's value.
+
+**Arguments**
+
+- `peripheral` - `String` - the id of the peripheral
+- `characteristic` - `String` - the UUID of the characteristic
+- `isNotifying` - `Boolean` - Is the characteristic notifying or not
+- `domain` - `String` - [iOS only] error domain
+- `code` - `Number` - [iOS only] error code
